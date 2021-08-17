@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: "homes#top"
-    get "about" => "items#about"
+    get "about" => "homes#about"
     resources :items,only:[:index,:show]
     resource :customers,only:[:edit,:update]
     resources :cart_items,only:[:index,:update,:destroy,:create]
