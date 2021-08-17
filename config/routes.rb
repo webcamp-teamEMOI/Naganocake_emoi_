@@ -3,11 +3,11 @@ Rails.application.routes.draw do
   # devise_for :admins
   # devise_for :customers
 
-  devise_for :admins,controllers:{
+  devise_for :admin,controllers:{
     sessions: "admin/sessions"
   }
 
-  devise_scope :admins do
+  devise_scope :admin do
     get "admin/sign_in", to: "admin/sessions#new"
     post "admin/sign_in", to: "admin/sessions#create"
   end
@@ -27,30 +27,30 @@ Rails.application.routes.draw do
 
   end
 
-#   scope module: :public do
-#     root to: "homes#top"
-#     get "about" => "items#about"
-#     resources :items,only:[:index,:show]
-#     resource :customers,only:[:edit,:update]
-#     resources :cart_items,only:[:index,:update,:destroy,:create]
-#     resources :orders,only:[:show,:create,:index,:new]
-#     resources :addresses,except:[:new,:show]
-#     get "customers/my_page" => "customers#show"
-#     get "customers/unsubscribe" => "customers#unsubscribe"
-#     patch "customers/withdraw" => "customers#withdraw"
-#     delete "cart_items/destroy_all" => "cart_items#destroy_all"
-#     post "orders/confirm" => "orders#confirm"
-#     get "orders/complete" => "orders#complete"
-#   end
+  scope module: :public do
+    root to: "homes#top"
+    get "about" => "items#about"
+    resources :items,only:[:index,:show]
+    resource :customers,only:[:edit,:update]
+    resources :cart_items,only:[:index,:update,:destroy,:create]
+    resources :orders,only:[:show,:create,:index,:new]
+    resources :addresses,except:[:new,:show]
+    get "customers/my_page" => "customers#show"
+    get "customers/unsubscribe" => "customers#unsubscribe"
+    patch "customers/withdraw" => "customers#withdraw"
+    delete "cart_items/destroy_all" => "cart_items#destroy_all"
+    post "orders/confirm" => "orders#confirm"
+    get "orders/complete" => "orders#complete"
+  end
 
-#   namespace :admin do
-#     root to: "homes#top"
-#     resources :items,except:[:destroy]
-#     resources :genres,only:[:index,:create,:edit,:update]
-#     resources :customers,only:[:index,:show,:edit,:update]
-#     resources :orders,only:[:show,:update] do
-#       resources :order_details,only:[:update]
-#     end
-#   end
+  namespace :admin do
+    root to: "homes#top"
+    resources :items,except:[:destroy]
+    resources :genres,only:[:index,:create,:edit,:update]
+    resources :customers,only:[:index,:show,:edit,:update]
+    resources :orders,only:[:show,:update] do
+      resources :order_details,only:[:update]
+    end
+  end
 
 end
