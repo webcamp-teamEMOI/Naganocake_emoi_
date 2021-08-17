@@ -1,28 +1,31 @@
 Rails.application.routes.draw do
+
+  # devise_for :admins
+  # devise_for :customers
   
-# devise_for :admin,controllers:{
-#     sessions: "admin/sessions"
-#   }
+  devise_for :admins,controllers:{
+    sessions: "admin/sessions"
+  }
 
-#   devise_scope :admin do
-#     get "admin/sign_in", to: "admin/sessions#new"
-#     post "admin/sign_in", to: "admin/sessions#create"
-#   end
+  devise_scope :admins do
+    get "admin/sign_in", to: "admin/sessions#new"
+    post "admin/sign_in", to: "admin/sessions#create"
+  end
 
-#   devise_for :customers,controllers:{
-#     registrations: "public/registrations",
-#     sessions: "public/sessions"
-#   }
+  devise_for :customers,controllers:{
+    registrations: "public/registrations",
+    sessions: "public/sessions"
+  }
 
-#   devise_scope :customers do
-#     get "customers/sign_up", to: "public/registrations#new"
-#     post "customers", to: "public/registrations#create"
+  devise_scope :customers do
+    get "customers/sign_up", to: "public/registrations#new"
+    post "customers", to: "public/registrations#create"
 
-#     get "customers/sign_in", to: "public/sessions#new"
-#     post "customers/sign_in", to: "public/sessions#create"
-#     delete "customers/sign_out", to: "public/sessions#destroy"
+    get "customers/sign_in", to: "public/sessions#new"
+    post "customers/sign_in", to: "public/sessions#create"
+    delete "customers/sign_out", to: "public/sessions#destroy"
 
-#   end
+  end
 
 #   scope module: :public do
 #     root to: "homes#top"
