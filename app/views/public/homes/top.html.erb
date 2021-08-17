@@ -39,3 +39,16 @@
   </nav>
 </header>
 
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <%= render "genre", genres: @genres %> <!-- ジャンル検索の部分テンプレート -->
+  </div>
+
+  <div class="col-md-8 offset-md-1">
+    <div class="card" style="">
+      <%= image_tag '.jpg' %>
+    </div>
+  </div>
+
+</div>
+
