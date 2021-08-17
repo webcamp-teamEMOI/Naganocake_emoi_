@@ -3,13 +3,13 @@ Rails.application.routes.draw do
   # devise_for :admins
   # devise_for :customers
 
-  devise_for :admin,controllers:{
-    sessions: "admin/sessions"
+  devise_for :admin, :controllers => {
+    :sessions => "admin/sessions"
   }
 
   devise_scope :admin do
-    get "admin/sign_in", to: "admin/sessions#new"
-    post "admin/sign_in", to: "admin/sessions#create"
+    get "admin/sign_in", :to => "admin/sessions#new"
+    post "admin/sign_in", :to => "admin/sessions#create"
   end
 
   devise_for :customers,controllers:{
@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: "homes#top"
-    get "about" => "items#about"
+    get "about" => "homes#about"
     resources :items,only:[:index,:show]
     resource :customers,only:[:edit,:update]
     resources :cart_items,only:[:index,:update,:destroy,:create]
