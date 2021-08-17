@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <h1>商品一覧</h1>
+    <span>全<%= @items.ids.count %>件</span>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= render 'genre', genres: @genres %>
+    </div>
+    <div class="col">
+      <% @items.each do |item| %>
+        <div class="index_items">
+          <div class="item_image">
+            <%= link_to item_path(item.id) do %>
+              <%= attachment_image_tag(item, :image_id, :fill, 100, 100, fallback: "no_image.jpg") %>
+            <% end %>
+            <p><%= link_to 商品名 item.name, item_path(item.id) %></p>
+            <p>￥<%= item.price.to_s(:delimited) %></p>
+          </div>
+        </div>
+      <% end %>
+      <%= paginate @items %>
+    </div>
+  </div>
+</div>
