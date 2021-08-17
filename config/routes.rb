@@ -3,13 +3,13 @@ Rails.application.routes.draw do
   # devise_for :admins
   # devise_for :customers
 
-  devise_for :admin,controllers:{
-    sessions: "admin/sessions"
+  devise_for :admin, :controllers => {
+    :sessions => "admin/sessions"
   }
 
   devise_scope :admin do
-    get "admin/sign_in", to: "admin/sessions#new"
-    post "admin/sign_in", to: "admin/sessions#create"
+    get "admin/sign_in", :to => "admin/sessions#new"
+    post "admin/sign_in", :to => "admin/sessions#create"
   end
 
   devise_for :customers,controllers:{
