@@ -1,41 +1,37 @@
-<header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light p-5">
-    <div class="container">
-      <span>
-        <%= link_to "ながのCAKE", root_path, class:"navbar-brand fas fa-birthday-cake" %>
-      </span>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ml-auto">
-          <% if customer_signed_in? %>
-            <li>
-              <%= link_to "マイページ", customers_my_page_path(current_customer), class:"btn btn-sm btn-outline-secondary mr-5" %>
-            </li>
-            <li>
-              <%= link_to "商品一覧", items_path, class:"btn btn-sm btn-outline-secondary mr-5" %>
-            </li>
-            <li>
-              <%= link_to "カート", cart_items_path, class:"btn btn-sm btn-outline-secondary mr-5" %>
-            </li>
-            <li>
-              <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"btn btn-sm btn-outline-secondary mr-5" %>
-            </li>
-          <% else %>
-            <li>
-              <%= link_to "About", about_path, class:"btn btn-sm btn-outline-secondary mr-5" %>
-            </li>
-            <li>
-              <%= link_to "商品一覧", items_path, class:"btn btn-sm btn-outline-secondary mr-5" %>
-            </li>
-            <li>
-              <%= link_to "新規登録", new_customer_registration_path, class:"btn btn-sm btn-outline-secondary mr-5" %>
-            </li>
-            <li>
-              <%= link_to "ログイン", new_customer_session_path, class:"btn btn-sm btn-outline-secondary mr-5" %>
-            </li>
-          <% end %>
-        </ul>
+
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <%= render "genre", genres: @genres %> <!-- ジャンル検索の部分テンプレート -->
+  </div>
+
+  <div class="col-md-8 offset-md-1">
+    <div class="row">
+      <div class="card">
+        <%= image_tag 'no_image.jpg', size: '600x300' %>
+        <div class="card-img-overlay">
+          <h6>
+            ようこそ、ながのCAKEへ！<br>
+            このサイトは、ケーキ販売のECサイトになります。<br>
+            会員でない方も商品の閲覧はできますが、<br>
+            購入には会員登録が必要になります。
+          </h6>
+        </div>
       </div>
     </div>
-  </nav>
-</header>
+    <div class="row">
+      <h4>新着商品</h4>
+      <% @items.each do |item| %>
+        <div class="col">
+          <%= link_to item_path(item.id) do %>
+            <%= attachment_image_tag item, :image, format: "jpeg", fallback: "no_image.jpg", size: "150x100" %>
+          <% end %>
+          <p><%= link_to item.name, item_path(item.id) %></p>
+          <p>￥<%= item.price.to_s(:delimited) %></p>
+        </div>
+      <% end %>
+      <%= link_to "全ての商品を見る >", items_path %>
+    </div>
+  </div>
+
+</div>
 
