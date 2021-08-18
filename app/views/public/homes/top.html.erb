@@ -8,7 +8,7 @@
         <ul class="navbar-nav ml-auto">
           <% if customer_signed_in? %>
             <li>
-              <%= link_to "マイページ", customers_my_page_path(current_user), class:"btn btn-sm btn-outline-secondary mr-5" %>
+              <%= link_to "マイページ", customers_my_page_path(current_customer), class:"btn btn-sm btn-outline-secondary mr-5" %>
             </li>
             <li>
               <%= link_to "商品一覧", items_path, class:"btn btn-sm btn-outline-secondary mr-5" %>
@@ -45,8 +45,18 @@
   </div>
 
   <div class="col-md-8 offset-md-1">
-    <div class="card" style="">
-      <%= image_tag '.jpg' %>
+    <div class="row">
+      <div class="card" style="height: 300px;, width: 500px;">
+        <%= image_tag 'no_image.jpg' %>
+        <div class="card-img-overlay">
+          <h4>
+            ようこそ、ながのCAKEへ！<br>
+            このサイトは、ケーキ販売のECサイトになります。<br>
+            会員でない方も商品の閲覧はできますが、<br>
+            購入には会員登録が必要になります。
+          </h4>
+        </div>
+      </div>
     </div>
   </div>
 
