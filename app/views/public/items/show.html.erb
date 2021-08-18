@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= render 'genre', genres: @genres %>
+    </div>
+    <div class="col">
+      <%= attachment_image_tag(@item, :image_id, :fill, 100, 100, fallback: "no_image.jpg") %>
+    </div>
+    <div class="col">
+      <h2><%= @item.name %></h2>
+      <p><%= @item.introduction %></p>
+      <%= @item.add_tax_price.to_s(:delimited) %> (税込)
+      <%= form_with model: @cart_items do |f| %>
+        <%= f.hidden_field :item_id, value: @item.id %>
+                                         <!--データ型to_s or to_a?-->
+        <%= f.select :amount, options_for_select((1..20).to_s), include_blank: "個数選択" %>
+        <%= f.submit "カートに入れる" %>
+      <% end %>
+    </div>
+  </div>
+</div>
