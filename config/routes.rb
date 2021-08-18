@@ -41,6 +41,7 @@ Rails.application.routes.draw do
     delete "cart_items/destroy_all" => "cart_items#destroy_all"
     post "orders/confirm" => "orders#confirm"
     get "orders/complete" => "orders#complete"
+    
   end
 
   namespace :admin do
