@@ -2,6 +2,11 @@ Rails.application.routes.draw do
 
   # devise_for :admins
   # devise_for :customers
+  scope module: :public do
+  get "customers/edit" => "customers#edit"
+  get "customers/my_page" => "customers#show"
+  patch "customers/my_page" => "customers#update"
+  end
 
   devise_for :admin, :controllers => {
     :sessions => "admin/sessions"
@@ -35,13 +40,12 @@ Rails.application.routes.draw do
     resources :cart_items,only:[:index,:update,:destroy,:create]
     resources :orders,only:[:show,:create,:index,:new]
     resources :addresses,except:[:new,:show]
-    get "customers/my_page" => "customers#show"
     get "customers/unsubscribe" => "customers#unsubscribe"
     patch "customers/withdraw" => "customers#withdraw"
     delete "cart_items/destroy_all" => "cart_items#destroy_all"
     post "orders/confirm" => "orders#confirm"
     get "orders/complete" => "orders#complete"
-    
+
   end
 
   namespace :admin do
