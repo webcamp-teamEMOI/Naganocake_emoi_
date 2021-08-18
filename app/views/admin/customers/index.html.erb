@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h3>会員一覧</h3>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>会員ID</th>
+            <th>氏名</th>
+            <th>メールアドレス</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <% @customers.each do |customer| %>
+        <tbody>
+          <tr>
+            <td><%= customer.id %></td>
+            <td><%= link_to customer.full_name, admin_customer_path(customer) %></td>
+            <td nowrap><%= customer.email %></td>
+            <td>
+              <% if customer.is_deleted %>
+                <%= link_to "有効",admin_customer_path(customer,customer: {is_deleted: false}),method: :put %>
+              <% else %>
+                <%= link_to "退会",admin_customer_path(customer,customer: {is_deleted: true}),method: :put %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
