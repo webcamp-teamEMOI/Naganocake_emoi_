@@ -18,12 +18,12 @@ Rails.application.routes.draw do
   }
 
   devise_scope :customers do
-    get "customers/sign_up", to: "public/registrations#new"
-    post "customers", to: "public/registrations#create"
+    get "customers/sign_up", :to => "public/registrations#new"
+    post "customers", :to => "public/registrations#create"
 
-    get "customers/sign_in", to: "public/sessions#new"
-    post "customers/sign_in", to: "public/sessions#create"
-    delete "customers/sign_out", to: "public/sessions#destroy"
+    get "customers/sign_in", :to => "public/sessions#new"
+    post "customers/sign_in", :to => "public/sessions#create"
+    delete "customers/sign_out", :to => "public/sessions#destroy"
 
   end
 
@@ -41,6 +41,7 @@ Rails.application.routes.draw do
     delete "cart_items/destroy_all" => "cart_items#destroy_all"
     post "orders/confirm" => "orders#confirm"
     get "orders/complete" => "orders#complete"
+    
   end
 
   namespace :admin do
