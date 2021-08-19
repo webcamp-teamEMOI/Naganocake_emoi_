@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: "homes#top"
     get "about" => "homes#about"
+    get "/search", to: "searches#search"
     resources :items,only:[:index,:show]
     resource :customers,only:[:edit,:update]
     resources :cart_items,only:[:index,:update,:destroy,:create]
@@ -50,6 +51,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: "homes#top"
+    get "/search", to: "searches#search"
     resources :items,except:[:destroy]
     resources :genres,only:[:index,:create,:edit,:update]
     resources :customers,only:[:index,:show,:edit,:update]
