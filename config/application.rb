@@ -17,5 +17,9 @@ module NaganoCakeEmoi
     # the framework and any gems in your application.
 
     config.time_zone = 'Tokyo'
+    
+    # 標準 日本語化
+    config.i18n.default_locale = :ja
+    
   end
 end

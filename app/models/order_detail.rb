@@ -6,6 +6,7 @@ class OrderDetail < ApplicationRecord
      production_complete:3,#制作
  }
 
- belongs_to :order
-
+  belongs_to :order
+  belongs_to :item
+  
 end

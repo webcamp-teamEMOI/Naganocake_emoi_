@@ -5,6 +5,7 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :cart_items, dependent: :destroy
+  has_many :orders,dependent: :destroy
 
   def full_name
     self.last_name + " " + self.first_name
@@ -17,5 +18,5 @@ class Customer < ApplicationRecord
   def active_for_authentication?
     super && (self.is_deleted == false)
   end
- 
+
 end
