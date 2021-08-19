@@ -12,7 +12,6 @@
       <%= @item.add_tax_price.to_s(:delimited) %> (税込)
       <%= form_with model: @cart_items do |f| %>
         <%= f.hidden_field :item_id, value: @item.id %>
-                                         <!--データ型to_s or to_a?-->
         <%= f.select :amount, options_for_select((1..20).to_a), include_blank: "個数選択" %>
         <%= f.submit "カートに入れる" %>
       <% end %>
