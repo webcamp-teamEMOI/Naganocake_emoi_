@@ -94,6 +94,34 @@
               <% end %>
             </div>
           <% end %>
+          <% if admin_signed_in? %>
+            <div class="row">
+              <%= form_with url: admin_search_path, method: :get, local: true do |f| %>
+                <%= f.text_field 'search[value]', placeholder: "Search", size: "26x4" %><br>
+                <span class="search-button col-xs-12 text-right">
+                  <%= f.select 'search[how]', options_for_select({ "部分一致" => "partical", "前方一致" => "forward", "後方一致" => "backward", "完全一致" => "match" }) %>
+                  <%= f.button :type => "submit", style: 'border-style: none; background: none;' do %>
+                    <i class="fas fa-search"></i>
+                  <% end %>
+                </span>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="row">
+              <%= form_with url: search_path, method: :get, local: true do |f| %>
+                <form>
+                <%= f.text_field 'search[value]', placeholder: "Search", size: "26x4" %>
+                <%= f.button :type => "submit", style: 'border-style: none; background: none;' do %>
+                z
+                <span class="search-button col-xs-12 text-right">
+                  <%= f.select 'search[how]', options_for_select({ "部分一致" => "partical", "前方一致" => "forward", "後方一致" => "backward", "完全一致" => "match" }) %>
+                  <%= f.button :type => "submit", style: 'border-style: none; background: none;' do %>
+                    <i class="fas fa-search"></i>
+                  <% end %>
+                </span>
+              <% end %>
+            </div>
+          <% end %>
         </div>
       </nav>
     </header>
