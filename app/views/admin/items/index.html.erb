@@ -1,7 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h3 class="my-3">会員一覧</h3>
+      <h3 class="my-3">商品一覧</h3>
+
       <table class="table">
         <thead>
           <tr>
@@ -16,8 +17,8 @@
         <tbody>
           <tr>
             <td><%= item.id %></td>
-            <td><%= link_to item.name, admin_item_path(item) %></td>
-            <td nowrap><%= item.price %></td>
+            <td nowrap><%= link_to item.name, admin_item_path(item) %></td>
+            <td><%= item.price.to_s(:delimited) %></td>
             <td><%= item.genre.name %></td>
             <td>
               <% if item.is_active? %>
