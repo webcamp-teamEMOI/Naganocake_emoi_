@@ -5,4 +5,7 @@ class OrderDetail < ApplicationRecord
      in_production:2,#製作中
      production_complete:3,#制作
  }
+
+ belongs_to :order
+
 end
