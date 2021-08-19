@@ -1,9 +1,10 @@
 
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <%= render "genre", genres: @genres %> <!-- ジャンル検索の部分テンプレート -->
+    <div class="col-md-3">
+      <%= render "genre", genres: @genres %> <!-- ジャンル検索の部分テンプレート -->
+    </div>
   </div>
-
   <div class="col-md-8 offset-md-1">
     <div class="row">
       <div class="card">
