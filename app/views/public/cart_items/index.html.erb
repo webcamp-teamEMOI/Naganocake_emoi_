@@ -21,7 +21,7 @@
       <td></td>
       <td>
       <%= form_with model: cart_item do |f| %>
-        <%= f.select :amount, options_for_select((1..20).to_s), include_blank: "個数選択" %>
+        <%= f.select :amount, options_for_select((1..20).to_a), include_blank: "個数選択" %>
         <%= f.submit "変更" %>
       <% end %>
       </td>
