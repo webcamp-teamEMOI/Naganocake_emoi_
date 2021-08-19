@@ -1,29 +1,35 @@
 
-<div class="container px-5 px-sm-0">
-  <div class="row">
-<div class="col-lg-1"></div>
-    <div class="col-lg-10 ">
-      <h5 class="m-3 text-left">ログイン</h5>
-      <h6>会員の方はこちらからログイン</h6>
+<div class="container mr-5">
+ <div class="row mt-5 ml-3">
+  <h4 class="bg-light">ログイン</h4>
+ </diV>
+ <div class="row mt-3 ml-5">
+  <h5 class="bg-light">会員の方はこちらからログイン</5> 
+ </div> 
+</div>  
 
+<div class="container mr-5">
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
- <div class="form-group row">
-          <div class="col-sm-4"><%= f.label :メールアドレス %></div>
-          <div class="col-sm-5"><%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder:"sample@example.com",class:"form-control" %></div>
-        </div>
 
-        <div class="form-group row">
-          <div class="col-sm-4"><%= f.label :パスワード %></div>
-          <div class="col-sm-5"><%= f.password_field :password, autocomplete: "current-password",class:"form-control" %></div>
-        </div>
-
-        <div class="text-center">
-          <%= f.submit "ログイン",class:"btn btn-primary px-5" %>
-        </div>
-      <% end %>
-<h6>会員登録がお済みでない方</h6><br>
-<%= render "customers/shared/links" %>
-
+<div class="form-group row mt-3 ml-5">
+ <div class="col-sm-2 pl-5"><%= f.label :メールアドレス %></div>
+ <div class="col-sm-6"><%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder:"sample@example.com",class:"form-control border-dark" %></div>
 </div>
+<div class="form-group row mt-3 ml-5">
+ <div class="col-sm-2 pl-5"><%= f.label :パスワード %></div>
+ <div class="col-sm-6"><%= f.password_field :password, autocomplete: "current-password",class:"form-control border-dark" %></div>
+</div>
+<div class="row mt-5 ml-5">
+ <div class="col-sm-2"></div>
+ <div class="col-sm-6"><%= f.submit "ログイン",class:"btn btn-primary px-5 font-weight-bold " %> </div>
+</div>
+<% end %>
+
+<div class="row mt-5 ml-5">
+<h5 class="bg-light">会員登録がお済みでない方</h5>
+</div>
+<div class="row ml-4 mt-1">
+ <p class=" ml-5 pl-5"><u class="mr-5"><%= link_to "こちら",customers_sign_up_path %></u>から新規登録を行ってください。</p>
+</div>  
 </div>
 </div>
