@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h3 class="my-3">注文履歴詳細</h3>
+
+      <div class="row">
+        <div class="col">購入者</div>
+        <div class="col"><%= @order.customer.name %></div>
+
+        <div class="col">注文日</div>
+        <div class="col"><%= @order.created_at.strftime("%Y/%m/%d") %></div>
+
+        <div class="col">配送先</div>
+        <div class="col">〒<%= @order.postal_code %> <%= @order.address %><br><%= @order.name %></div>
+
+        <div class="col">支払い方法</div>
+        <div class="col">
+          <% if  @order.payment_method = 0 %>
+            クレジットカード
+          <% else %>
+            銀行払い
+          <% end %>
+        </div>
+
+        <div class="col">注文ステータス</div>
+        <div class="col">
+          <%= form_with model:order,local:true do |f| %>
+          <%= f.select :status,Order.statuses_i18n.invert,{prompt: false},class:"form-control" %>
+          <%= f.submit "更新" %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>商品名</th>
+              <th>単価(税込)</th>
+              <th>数量</th>
+              <th>小計</th>
+              <th>製作ステータス</th>
+              <th></th>
+            </tr>
+          </thead>
+          <% sum = 0 %>
+          <% @order.order_details.each do |order_detail| %>
+          <tbody>
+            <tr>
+              <td><%= order_detail.items.name %></td>
+              <td><%= order_detail.items.add_tax_price %></td>
+              <td><%= order_detail.amount %></td>
+              <td><%= order_detail.price %></td>
+              <td>
+                <%= form_with model:order_detail,local:true do |f| %>
+                <%= f.select :making_status,OrderDetail.making_statuses_i18n.invert,{prompt: false} ,class:"form-control" %>
+                <%= f.submit "更新" %>
+                <% end %>
+              </td>
+            </tr>
+          </tbody>
+          <% sum += order_detail.price %>
+          <% end %>
+        </table>
+        </div>
+        <div class="col">
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <td class="font-weight-bold">商品合計</td>
+                <!--合計金額表示されるか確認する-->
+                <td><%= sum %>円</td>
+              </tr>
+              <tr>
+                <td class="font-weight-bold">送料</td>
+                <td><%= @order.shipping_cost %>円</td>
+              </tr>
+              <tr>
+                <td class="font-weight-bold">請求金額合計</td>
+                <td><%= @order.total_payment %>円</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+</div>
