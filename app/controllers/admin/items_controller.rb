@@ -8,8 +8,11 @@ class Admin::ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    @item.save
-    redirect_to admin_item_path(@item)
+    if @item.save
+      redirect_to admin_item_path(@item)
+    else
+      redirect_to request.referer,notice:"新規登録できませんでした"
+    end
   end
 
   def show
@@ -18,6 +21,19 @@ class Admin::ItemsController < ApplicationController
 
   def index
     @items = Item.page(params[:page]).per(10)
+  end
+
+  def edit
+    @item = Item.find(params[:id])
+  end
+
+  def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      redirect_to admin_item_path(@item)
+    else
+      redirect_to request.referer,notice:"変更を保存できませんでした"
+    end
   end
 
   private
