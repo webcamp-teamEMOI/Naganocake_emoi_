@@ -1,9 +1,9 @@
 class Order < ApplicationRecord
   enum payment_method: {
-        credit_card:0,#クレジットカード 
+        credit_card:0,#クレジットカード
         bank_payment:1,#銀行払い
     }
-    
+
     enum status: {
         payment_waiting:0,#入金待ち
         payment_confirmation:1,#入金確認
@@ -11,4 +11,7 @@ class Order < ApplicationRecord
         preparing_delivery:3,#発送準備中
         delivered:4,#発送済み
     }
+    
+    has_many :order_details,dependent: :destroy
+    
 end
