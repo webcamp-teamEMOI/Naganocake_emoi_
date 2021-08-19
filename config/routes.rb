@@ -37,12 +37,12 @@ Rails.application.routes.draw do
     get "about" => "homes#about"
     resources :items,only:[:index,:show]
     resource :customers,only:[:edit,:update]
+    delete "cart_items/destroy_all" => "cart_items#destroy_all"
     resources :cart_items,only:[:index,:update,:destroy,:create]
     resources :orders,only:[:show,:create,:index,:new]
     resources :addresses,except:[:new,:show]
     get "customers/unsubscribe" => "customers#unsubscribe"
     patch "customers/withdraw" => "customers#withdraw"
-    delete "cart_items/destroy_all" => "cart_items#destroy_all"
     post "orders/confirm" => "orders#confirm"
     get "orders/complete" => "orders#complete"
 
