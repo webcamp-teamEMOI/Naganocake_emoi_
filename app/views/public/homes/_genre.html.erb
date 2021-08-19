@@ -1,14 +1,16 @@
-<div class="col-md-3">
-  <table class="table">
+<table class="table table-bordered genre-table">
+  <thead>
     <tr>
       <th>ジャンル検索</th>
     </tr>
+  </thead>
+  <tbody>
     <% genres.each do |genre| %>
       <tr>
-        <th>
-          <%= genre.name %>
-        </th>
+        <td>
+          <%= genre.name %> <!--link_to genre.name, #search_path('search[value]': genre.id, 'search[how]': "match")--> 
+        </td>
       </tr>
     <% end %>
-  </table>
-</div>
+  </tbody>
+</table>
