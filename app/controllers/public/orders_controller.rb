@@ -4,6 +4,10 @@ class Public::OrdersController < ApplicationController
     @customer = current_customer
     @addresses = Address.where(customer_id: current_customer.id)
   end
+  
+  def confirm
+    @cart_items = current_customer.cart_items
+  end
 
 	def create
 		customer = current_customer
@@ -62,12 +66,6 @@ class Public::OrdersController < ApplicationController
 		end
 
 	end
-
-  def confirm
-    @cart_items = current_customer.cart_items
-    @order = Order.new(order_params)
-    @order.customer_id = current_customer.id
-  end
 
   private
 
