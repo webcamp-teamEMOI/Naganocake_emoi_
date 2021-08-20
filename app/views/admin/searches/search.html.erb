@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <% if @datas.empty? %>
+        <h3>該当する商品はありません</h3>
+      <% else %>
+        <h3 class="my-3">"<%= @value %>"の検索結果</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>商品ID</th>
+              <th>商品名</th>
+              <th>税抜価格</th>
+              <th>ジャンル</th>
+              <th>ステータス</th>
+            </tr>
+          </thead>
+          <% @datas.each do |data| %>
+            <tbody>
+              <tr>
+                <td><%= data.id %></td>
+                <td nowrap><%= link_to data.name, admin_item_path(data) %></td>
+                <td><%= data.price.to_s(:delimited) %></td>
+                <td><%= data.genre.name %></td>
+                <td>
+                  <% if data.is_active? %>
+                    <span class="text-success font-weight-bold">販売中</span>
+                  <% else %>
+                    <span class="text-secondary font-weight-bold">販売停止中</span>
+                  <% end %>
+                </td>
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
+      <% end %>  
+    </div>
+  </div>
+</div>

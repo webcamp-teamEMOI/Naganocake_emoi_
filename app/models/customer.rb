@@ -6,7 +6,12 @@ class Customer < ApplicationRecord
 
   has_many :cart_items, dependent: :destroy
   has_many :addresses,dependent: :destroy
+<<<<<<< HEAD
   has_many :orders ,dependent: :destroy
+=======
+  
+  has_many :orders,dependent: :destroy
+>>>>>>> 7d614d156eedac79d6997e6a41028011a55a833f
 
   def full_name
     self.last_name + " " + self.first_name
@@ -19,5 +24,5 @@ class Customer < ApplicationRecord
   def active_for_authentication?
     super && (self.is_deleted == false)
   end
- 
+
 end

@@ -13,9 +13,18 @@ class Order < ApplicationRecord
     }
     
     has_many :order_details,dependent: :destroy
+<<<<<<< HEAD
     has_many :items, through: :order_details　#中間テーブル
     
     belongs_to :customer
     
+=======
+
+    belongs_to :customer
+    
+    has_many :items,through: :order_details,source: :item
+   
+
+>>>>>>> 7d614d156eedac79d6997e6a41028011a55a833f
     
 end
