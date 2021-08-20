@@ -13,7 +13,32 @@
  *= require_tree .
  *= require_self
  */
- 
+
 @import "bootstrap";
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
+
+.pagination{
+  justify-content:center;
+}
+
+.page,
+.next,
+.last,
+.first,
+.prev{
+  margin:0 5px;
+}
+
+footer{
+  height:100px;
+  width:100%;
+}
+
+.item-box p{
+  font-weight:bold;
+}
+
+main{
+  height:800px;
+}
