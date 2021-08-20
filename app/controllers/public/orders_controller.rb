@@ -67,9 +67,41 @@ class Public::OrdersController < ApplicationController
 
 	end
 
-  private
+  def complete
+		order = Order.new(session[:order])
+		order.save
+		# 新しいお届け先を自動で保存？
+		if session[:new_address]
+			address = current_customer.addresses.new
+			address.postal_code = order.postal_code
+			address.address = order.address
+			address.name = order.name
+			address.save
+			session[:new_address] = nil
+		end
 
-  def order_params
-    params.require(:order).permit(:shipping_cost, :total_payment, :payment_method, :name, :address, :postal_code, :status, :address_for_order)
+		# 以下、order_detail(中間テーブル)作成
+		cart_items = current_customer.cart_items
+		cart_items.each do |cart_item|
+		order_detail = OrderDetail.new
+		order_detail.order_id = order.id
+		order_detail.item_id = cart_item.item.id
+		order_detail.amount = cart_item.amount
+		order_detail.making_status = 0
+		order_detail.price = (cart_item.item.add_tax_price).floor
+		order_detail.save
+		end
+
+		# 購入後はカート内商品削除
+		cart_items.destroy_all
   end
+
+  def index
+  	@orders = current_customer.orders
+  end
+
+  def show
+  	@order = Order.find(params[:id])
+  end
+
 end

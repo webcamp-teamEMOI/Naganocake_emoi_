@@ -42,11 +42,11 @@ Rails.application.routes.draw do
     resources :cart_items,only:[:index,:update,:destroy,:create]
     get "orders/confirm" => "orders#confirm"
     post "orders/confirm" => "orders#confirm"
+    get "orders/complete" => "orders#complete"
     resources :orders,only:[:show,:create,:index,:new]
     resources :addresses,except:[:new,:show]
     get "customers/unsubscribe" => "customers#unsubscribe"
     patch "customers/withdraw" => "customers#withdraw"
-    get "orders/complete" => "orders#complete"
 
   end
 
