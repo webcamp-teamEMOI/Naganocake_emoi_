@@ -1,47 +1,74 @@
 <div class="container">
-
-		<%= form_with(url: orders_path, method: :post) do |form| %>
-			<h3>支払方法</h3>
-
+ <div class="row mt-5 ml-5">
+  <h4 class="bg-light px-4">注文情報入力</h4>
+ </div>
+</div>
+ <%= form_with(url: orders_path, method: :post) do |form| %>
+<div class="container ">
+ <div class="form-group row mt-4">
+   <h4 class="col-sm-3"><strong>支払方法</strong></h4>
+ </div>
+ <div class="form-group row ">
 			<!-- form.radio_button :カラム名, :保存される値(enumの番号) -->
+      <h5 class="col-sm-3 mx-5">
       <%= form.radio_button :payment_method, 0, checked: true %>
       <%= form.label :payment_method_credit_card, 'クレジットカード' %>
+      </h5>
+      <h5 class="col-sm-3 mx-5">
       <%= form.radio_button :payment_method, 1 %>
       <%= form.label :payment_method_bank_payment, '銀行払い' %>
+      </h5>
+ </div>
 
+ <div class="form-group row ">
+   <h4 class="col-sm-2 "><strong>お届け先</strong></h4>
+ </div>
+ <div class="form-group row ">
+   <h5 class="col-sm-3 mx-5"><%= form.radio_button :a_method, 0, checked: "checked" %>
+   <%= form.label :ご自身の住所 %></h5>
+   <div class="col-sm-9"></div>
+   <h5 class=" offset-sm-1 col-sm-6">〒<%= @customer.postal_code %>
+   <%= @customer.address %></br>
+   <%= @customer.full_name %></h5>
+ </div>
 
-			<h3>お届け先</h3>
+ <div class="form-group row ">
+   <h5 class="col-sm-3 mx-5"><%= form.radio_button :a_method, 1 %>
+   <%= form.label :登録済住所から選択 %></h5>
+   <div class="col-sm-9"></div>
+   <div class="offset-sm-1 col-sm-8"><%= form.collection_select :address_for_order, @addresses, :id, :address_all %></div>
+ </div>
 
-			<%= form.radio_button :order, 0, checked: "checked" %>
-			<%= form.label :ご自身の住所 %><br>
-			<%= @customer.postal_code %><br>
-			<%= @customer.address %><br>
-			<%= @customer.full_name %><br>
+ <div class="form-group row ">
+   <h5 class="col-sm-3 mx-5"><%= form.radio_button :a_method, 2 %>
+   <%= form.label :新しいお届け先 %></h5>
+   <div class="col-sm-9"></div>
+ </div>
 
+ <div class="form-group row mt-2">
+  <div class="input-group">
+   <div class="offset-sm-1 col-sm-3 input-gruop-append"><%= form.label :"郵便番号(ハイフンなし)", class: "col-xs-3 control-label"  %></div>
+   <div class="col-sm-3 input-gruop-append"><%= form.text_field :post_code, class: "col-xs-4 form-control-static postal_code" %></div>
+  </div>
+ </div>
 
-			<%= form.radio_button :a_method, 1 %>
-			<%= form.label :登録済住所から選択 %><br>
-			<!-- collection_select(プロパティ名, オブジェクトの配列, value属性の項目, テキストの項目 [, オプション])-->
-			<%= form.collection_select :address_for_order, @addresses, :id, :address_in_database %><br>
+ <div class="form-group row mt-2">
+  <div class="input-group">
+   <div class="offset-sm-1 col-sm-3 input-gruop-append"><%= form.label :"住所", class: "col-xs-3 control-label" %></div>
+   <div class="col-sm-6 input-gruop-append"><%= form.text_field :address, class: "col-xs-7 form-control-static address" %></div>
+  </div>
+ </div>
 
+ <div class="form-group row mt-2">
+  <div class="input-group">
+   <div class="offset-sm-1 col-sm-3 input-gruop-append"><%= form.label :"宛名", class: "col-xs-3 control-label" %></div>
+   <div class="col-sm-3 input-gruop-append"><%= form.text_field :name, class: "col-xs-4 form-control-static name"%></div>
+  </div>
+ </div>
 
-
-			<%= form.radio_button :a_method, 2 %>
-			<%= form.label :新しいお届け先 %><br>
-			<div class="form-group col-xs-12">
-				<%= form.label :"郵便番号(ハイフンなし)", class: "col-xs-3 control-label"  %>
-				<%= form.text_field :post_code, class: "col-xs-4 form-control-static postal_code" %>
-			</div>
-			<div class="form-group col-xs-12">
-				<%= form.label :"住所", class: "col-xs-3 control-label" %>
-				<%= form.text_field :address, class: "col-xs-7 form-control-static address" %>
-			</div>
-			<div class="form-group col-xs-12">
-				<%= form.label :"宛名", class: "col-xs-3 control-label" %>
-				<%= form.text_field :name, class: "col-xs-4 form-control-static name"%>
-			</div>
-
-	   		<%= form.submit "確認画面へ進む", class: 'btn btn-warning col-xs-6 col-xs-offset-1'%>
-		<% end %>
+<div class="row mt-2 mb-2">
+  <div class="col-sm-5"></div>
+  <div class="col-sm-3"><%= form.submit "確認画面へ進む", class: 'btn btn-warning col-xs-6 col-xs-offset-1'%></div>
+  <% end %>
 
 </div>

@@ -4,7 +4,7 @@ class Public::OrdersController < ApplicationController
     @customer = current_customer
     @addresses = Address.where(customer_id: current_customer.id)
   end
-  
+
   def confirm
     @cart_items = current_customer.cart_items
   end
@@ -28,10 +28,10 @@ class Public::OrdersController < ApplicationController
 		session[:order][:status] = 0
 		session[:order][:customer_id] = current_customer.id
 		# ラジオボタンで選択された支払方法のenum番号を渡している
-		session[:order][:payment_method] = params[:method].to_i
+		session[:order][:payment_method] = params[:payment_method].to_i
 
 		# ラジオボタンで選択されたお届け先によって条件分岐
-		destination = params[:payment_method].to_i
+		destination = params[:a_method].to_i
 
 		# ご自身の住所が選択された時
 		if destination == 0
@@ -43,8 +43,8 @@ class Public::OrdersController < ApplicationController
 		# 登録済住所が選択された時
 		elsif destination == 1
 
-			address = ShippingAddress.find(params[:address_for_order])
-			session[:order][:postal_code] = address.postal_code
+			address = Address.find(params[:address_for_order])
+			session[:order][:postal_code] = address.postal_code.to_i
 			session[:order][:address] = address.address
 			session[:order][:name] = address.name
 
@@ -52,17 +52,17 @@ class Public::OrdersController < ApplicationController
 		elsif destination == 2
 
 			session[:new_address] = 2
-			session[:order][:postal_code] = params[:postal_code]
+			session[:order][:postal_code] = params[:postal_code].to_i
 			session[:order][:address] = params[:address]
 			session[:order][:name] = params[:name]
 
 		end
 
 		# お届け先情報に漏れがあればリダイレクト
-		if session[:order][:post_code].presence && session[:order][:address].presence && session[:order][:name].presence
-			redirect_to new_order_path
+		if session[:order][:postal_code].presence && session[:order][:address].presence && session[:order][:name].presence
+			redirect_to orders_confirm_path
 		else
-			redirect_to '/orders/confirm'
+			redirect_to new_order_path
 		end
 
 	end
@@ -70,6 +70,6 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:shipping_cost, :total_payment, :payment_method, :name, :address, :postal_code, :status)
+    params.require(:order).permit(:shipping_cost, :total_payment, :payment_method, :name, :address, :postal_code, :status, :address_for_order)
   end
 end

@@ -31,7 +31,7 @@
           <tr>
             <th class="info">商品合計</th>
             <td class="text-right">
-              ¥<%= (session[:order]["total_payment"] - session[:order]["postage"]).to_s(:delimited) %>
+              ¥<%= sum.round.to_s(:delimited) %>
             </td>
           </tr>
           <tr>
@@ -53,14 +53,14 @@
         <tr>
           <th  class="info">お届け先</th>
           <td class="text-left">
-            <%= session[:order]["post_code"] %><br>
+            <%= session[:order]["postal_code"] %><br>
             <%= session[:order]["address"] %><br>
             <%= session[:order]["name"]  %>
           </td>
         </tr>
       </table>
 
-      <%= link_to "購入を確定する", customers_orders_complete_path, class: 'btn btn-primary col-xs-12' %>
+
 
     </div>
 
