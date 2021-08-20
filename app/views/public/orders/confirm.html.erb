@@ -1,0 +1,67 @@
+<div class="container">
+
+  <div class="row"><span>注文情報確認</span></div>
+
+  <div class="row">
+
+    <div class="col">
+      <table class="table">
+        <tr><th>商品名</th><th>単価(税込)</th><th>数量</th><th>小計</th></tr>
+        <tr>
+          <% sum = 0 %>
+          <% @cart_items.each do |cart_item| %>
+            <td><%= cart_item.item.name %></td>
+            <td><%= cart_item.item.add_tax_price.to_s(:delimited) %></td>
+            <td><%= cart_item.amount %></td>
+            <td><%= (cart_item.amount*cart_item.item.price*1.1).round.to_s(:delimited) %></td>
+            <% sum += cart_item.amount*cart_item.item.price*1.1 %>
+          <% end %>
+        </tr>
+      </table>
+    </div>
+    <div class="col-xs-3 billing">
+      <table class="table table-hover table-condensed table-bordered">
+          <tr>
+            <th class="info">配送料</th>
+            <td class="text-right col-xs-5">
+              <!-- sessiomのデータを表示する場合、カラム名に""つける -->
+              ¥<%= session[:order]["postage"].to_s(:delimited, delimiter: ',') %>
+            </td>
+          </tr>
+          <tr>
+            <th class="info">商品合計</th>
+            <td class="text-right">
+              ¥<%= (session[:order]["total_payment"] - session[:order]["postage"]).to_s(:delimited, delimiter: ',') %>
+            </td>
+          </tr>
+          <tr>
+            <th class="info">請求金額</th>
+            <td class="text-right">
+              ¥<%= session[:order]["total_payment"].to_s(:delimited, delimiter: ',') %>
+            </td>
+          </tr>
+      </table>
+    </div>
+    <div class="col-xs-9 billing">
+      <table class="table table-hover table-condensed table-bordered">
+        <tr>
+          <th  class="info">支払方法</th>
+          <td class="text-left">
+            <%= session[:order]["payment_method"] %>
+          </td>
+        </tr>
+        <tr>
+          <th  class="info">お届け先</th>
+          <td class="text-left">
+            <%= session[:order]["post_code"] %><br>
+            <%= session[:order]["address"] %><br>
+            <%= session[:order]["name"]  %>
+          </td>
+        </tr>
+      </table>
+
+      <%= link_to "購入を確定する", customers_orders_complete_path, class: 'btn btn-primary col-xs-12' %>
+
+    </div>
+
+</div>
