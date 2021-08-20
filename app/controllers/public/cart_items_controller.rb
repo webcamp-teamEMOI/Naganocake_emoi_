@@ -38,9 +38,9 @@ class Public::CartItemsController < ApplicationController
   def update
     @cart_item = CartItem.find(params[:id])
     if @cart_item.update(cart_item_params)
-      redirect_to items_path
+      redirect_to request.referer
     else
-      redirect_to items_path
+      redirect_to request.referer
     end
   end
 
