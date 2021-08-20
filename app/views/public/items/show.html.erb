@@ -7,7 +7,7 @@
       <%= attachment_image_tag @item, :image, format: "jpeg", fallback: "no_image.jpg", size: "250x200" %>
     </div>
     <div class="col-5">
-      <h2><%= @item.name %></h2>
+      <h2 class="font-weight-bold"><%= @item.name %></h2>
       <p><%= @item.introduction %></p>
       <h4 class="mt-5 mb-4" ><span class="font-weight-bold">¥ <%= @item.add_tax_price.to_s(:delimited) %></span> <span class="small">(税込)</span></h4>
       <%= form_with model: @cart_items do |f| %>
