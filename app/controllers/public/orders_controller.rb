@@ -7,9 +7,11 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @cart_items = current_customer.cart_items
+
   end
 
   def create
+
   	customer = current_customer
 
 	# sessionを使ってデータを一時保存
@@ -30,12 +32,6 @@ class Public::OrdersController < ApplicationController
 	session[:order][:customer_id] = current_customer.id
 	# ラジオボタンで選択された支払方法のenum番号を渡している
 	session[:order][:payment_method] = params[:payment_method].to_i
-
-	# if params[:payment_method] == "0"
-	# 	@p_method = "クレジットカード"
-	# else
-	# 	@p_method = "銀行払い"
-	# end
 
 	# ラジオボタンで選択されたお届け先によって条件分岐
 	destination = params[:a_method].to_i
