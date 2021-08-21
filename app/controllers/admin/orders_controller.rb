@@ -2,12 +2,15 @@ class Admin::OrdersController < ApplicationController
 
   def show
     @order=Order.find(params[:id])
+    @order_details=OrderDetail.find_by(order_id: @order.id)
   end
 
   def update
     order=Order.find(params[:id])
     order.update(order_params)
     redirect_to request.referer
+
+
   end
 
   private
