@@ -1,20 +1,20 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h3 class="my-3">注文履歴詳細</h3>
+      <h3 class="my-3"><span class="bg-light">注文履歴詳細</span></h3>
 
       <div class="row">
-        <div class="col">購入者</div>
-        <div class="col"><%= @order.customer.name %></div>
+        <div class="col-2 mb-3 font-weight-bold">購入者</div>
+        <div class="col-10"><span class="border-bottom border-dark"><%= @order.customer.full_name %></span></div>
 
-        <div class="col">注文日</div>
-        <div class="col"><%= @order.created_at.strftime("%Y/%m/%d") %></div>
+        <div class="col-2 mb-3 font-weight-bold">注文日</div>
+        <div class="col-10"><%= @order.created_at.strftime("%Y/%m/%d") %></div>
 
-        <div class="col">配送先</div>
-        <div class="col">〒<%= @order.postal_code %> <%= @order.address %><br><%= @order.name %></div>
+        <div class="col-2 mb-3 font-weight-bold">配送先</div>
+        <div class="col-10">〒<%= @order.postal_code %> <%= @order.address %><br><%= @order.name %></div>
 
-        <div class="col">支払い方法</div>
-        <div class="col">
+        <div class="col-2 my-3 font-weight-bold">支払い方法</div>
+        <div class="col-10 mt-3">
           <% if  @order.payment_method = 0 %>
             クレジットカード
           <% else %>
@@ -22,19 +22,22 @@
           <% end %>
         </div>
 
-        <div class="col">注文ステータス</div>
-        <div class="col">
-          <%= form_with model:order,local:true do |f| %>
-          <%= f.select :status,Order.statuses_i18n.invert,{prompt: false},class:"form-control" %>
-          <%= f.submit "更新" %>
+        <div class="col-2 mb-3 font-weight-bold">注文ステータス</div>
+        <div class="col-6 input-group">
+          <%= form_with model: @order,url:admin_order_path(@order) ,local:true do |f| %>
+          <div class="row">
+          <div class="col-8"><%= f.select :status,Order.statuses_i18n.invert,{prompt: false},class:"form-control" %></div>
+          <div class="col-3"><%= f.submit "更新" ,class:" btn btn-success" %></div>
+          </div>
+          <% end %>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col">
+      <div class="row mt-5">
+        <div class="col-8">
         <table class="table">
           <thead>
-            <tr>
+            <tr class="table-active">
               <th>商品名</th>
               <th>単価(税込)</th>
               <th>数量</th>
@@ -47,14 +50,16 @@
           <% @order.order_details.each do |order_detail| %>
           <tbody>
             <tr>
-              <td><%= order_detail.items.name %></td>
-              <td><%= order_detail.items.add_tax_price %></td>
+              <td><%= order_detail.item.name %></td>
+              <td><%= order_detail.item.add_tax_price.to_s(:delimited) %></td>
               <td><%= order_detail.amount %></td>
-              <td><%= order_detail.price %></td>
-              <td>
-                <%= form_with model:order_detail,local:true do |f| %>
-                <%= f.select :making_status,OrderDetail.making_statuses_i18n.invert,{prompt: false} ,class:"form-control" %>
-                <%= f.submit "更新" %>
+              <td><%= order_detail.price.to_s(:delimited) %></td>
+              <td class="align-middle">
+                <%= form_with model: order_detail,url: admin_order_order_detail_path(@order,order_detail), local:true do |f| %>
+                <div class="input-group row">
+                <div class="ml-auto col-8"><%= f.select :making_status,OrderDetail.making_statuses_i18n.invert,{prompt: false} ,class:"form-control" %></div>
+                <div class="mr-auto col-3"><%= f.submit "更新",class:"btn btn-success" %></div>
+                </div>
                 <% end %>
               </td>
             </tr>
@@ -63,25 +68,29 @@
           <% end %>
         </table>
         </div>
-        <div class="col">
+
+        <div class="offset-1 col-3 d-flex align-items-end">
           <table class="table table-borderless">
             <tbody>
               <tr>
                 <td class="font-weight-bold">商品合計</td>
                 <!--合計金額表示されるか確認する-->
-                <td><%= sum %>円</td>
+                <td class="text-right"><%= sum.to_s(:delimited) %>円</td>
               </tr>
               <tr>
                 <td class="font-weight-bold">送料</td>
-                <td><%= @order.shipping_cost %>円</td>
+                <td class="text-right"><%= @order.shipping_cost.to_s(:delimited) %>円</td>
               </tr>
               <tr>
                 <td class="font-weight-bold">請求金額合計</td>
-                <td><%= @order.total_payment %>円</td>
+                <td class="font-weight-bold text-right"><%= @order.total_payment.to_s(:delimited) %>円</td>
               </tr>
             </tbody>
           </table>
         </div>
+
       </div>
+
     </div>
+</div>
 </div>

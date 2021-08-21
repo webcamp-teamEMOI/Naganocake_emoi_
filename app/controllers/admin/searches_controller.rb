@@ -1,4 +1,5 @@
 class Admin::SearchesController < ApplicationController
+  before_action :authenticate_admin!
 
   def search
     @value = params["search"]["value"]
@@ -9,7 +10,7 @@ class Admin::SearchesController < ApplicationController
   private
 
   def match(value)
-    Item.where(name: value).or(Item.where(genre_id: value))
+    Item.where(name: value)
   end
 
   def forward(value)

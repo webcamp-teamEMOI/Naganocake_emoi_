@@ -1,36 +1,36 @@
-
-<div class="container px-5 px-sm-0">
-  <div class="row">
-    <div class="col-md-3">
+<div class="main-visual">
+  <div class="main-visual-content">
+    <p class="main-visual-text">
+      ようこそ、ながのCAKEへ！<br>
+      このサイトは、ケーキ販売のECサイトになります。<br>
+      会員でない方も商品の閲覧はできますが、<br>
+      購入には会員登録が必要になります。
+    </p>
+  </div>
+</div>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-3 mt-5">
       <%= render "genre", genres: @genres %> <!-- ジャンル検索の部分テンプレート -->
     </div>
-  </div>
-  <div class="col-md-8 offset-md-1">
-    <div class="row">
-      <div class="card">
-        <%= image_tag 'naganocake-top.jpg', size: '600x300' %>
-        <div class="card-img-overlay">
-          <h6>
-            ようこそ、ながのCAKEへ！<br>
-            このサイトは、ケーキ販売のECサイトになります。<br>
-            会員でない方も商品の閲覧はできますが、<br>
-            購入には会員登録が必要になります。
-          </h6>
-        </div>
+    <div class="col-9">
+      <div class="row ml-3 mb-3">
+        <h4><span class="font-weight-bold">新着商品</span></h4>
       </div>
-    </div>
-    <div class="row">
-      <h4>新着商品</h4>
-      <% @items.each do |item| %>
-        <div class="col">
-          <%= link_to item_path(item.id) do %>
-            <%= attachment_image_tag item, :image, format: "jpeg", fallback: "no_image.jpg", size: "150x100" %>
-          <% end %>
-          <p><%= link_to item.name, item_path(item.id) %></p>
-          <p>￥<%= item.price.to_s(:delimited) %></p>
-        </div>
-      <% end %>
-      <%= link_to "全ての商品を見る >", items_path %>
+      <div class="row">
+        <% @items.each do |item| %>
+          <div class="col-3">
+            <%= link_to item_path(item.id) do %>
+              <%= attachment_image_tag item, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150" %>
+            <% end %>
+            <p class="my-2"><%= link_to item.name, item_path(item.id),class:"font-weight-bold text-dark" %></p>
+            <p class="font-weight-bold text-dark mb-5">￥<%= item.price.to_s(:delimited) %></p>
+          </div>
+        <% end %>
+      </div>
+      <div class="row justify-content-end">
+        <%= link_to "全ての商品を見る >", items_path %>
+      </div>
     </div>
   </div>
 </div>
