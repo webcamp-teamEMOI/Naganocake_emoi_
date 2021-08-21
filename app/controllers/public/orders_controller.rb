@@ -12,6 +12,7 @@ class Public::OrdersController < ApplicationController
 
   end
 
+
   private
 
   def order_params
