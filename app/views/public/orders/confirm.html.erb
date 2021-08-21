@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mt-5">
 
   <div class="row"><h4 class="bg-light px-4">注文情報確認</h4></div>
 
@@ -51,7 +51,7 @@
         <tr>
           <th  class="info" style="width: 20%">お届け先</th>
           <td class="text-left">
-            <%= session[:order]["postal_code"] %>
+            〒<%= session[:order]["postal_code"] %>
             <%= session[:order]["address"] %><br>
             <%= session[:order]["name"]  %>
           </td>
@@ -60,6 +60,5 @@
   </div>
 
   <div class="row justify-content-center"><%= link_to "購入を確定する", orders_complete_path, class: 'btn btn-primary col-xs-12' %></div>
-
 
 </div>

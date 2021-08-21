@@ -7,7 +7,6 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @cart_items = current_customer.cart_items
-
   end
 
   def create
@@ -84,12 +83,14 @@ class Public::OrdersController < ApplicationController
 	order_detail.price = (cart_item.item.add_tax_price).floor
 	order_detail.save
 	end
+	session.delete(:order)
+	session[:order] = nil
 	# 購入後はカート内商品削除
 	cart_items.destroy_all
   end
 
   def index
-  	@orders = current_customer.orders
+  	@orders = current_customer.orders.page(params[:page]).per(6)
   end
 
   def show
