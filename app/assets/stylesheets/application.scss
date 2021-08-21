@@ -48,20 +48,41 @@ main{
   height:800px;
 }
 
-.main-visual{
+.main-visual {
   width: 100%;
-  height: 300px;
-  background-image: image-url("naganocake-top.jpg");
+  height: 400px;
+}
+
+.image1 {
+  background-image: url(naganocake-top.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.image2 {
+  background-image: url(naganocake-top2.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.image3 {
+  background-image: url(naganocake-top3.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.image4 {
+  background-image: url(naganocake-top4.jpg);
   background-size: cover;
   background-position: center;
 }
 
 .main-visual-content {
   width: 40%;
-  height: 300px;
+  height: 400px;
   background-color: rgba(225, 225, 225, 0.5);
   text-align: center;
-  padding-top: 105px;
+  padding-top: 155px;
 }
 
 .main-visual-text {
