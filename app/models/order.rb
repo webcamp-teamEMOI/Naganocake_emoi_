@@ -11,13 +11,13 @@ class Order < ApplicationRecord
         preparing_delivery:3,#発送準備中
         delivered:4,#発送済み
     }
-    
+
     has_many :order_details,dependent: :destroy
 
     belongs_to :customer
-    
-    has_many :items,through: :order_details,source: :item
-   
 
-    
+    has_many :items,through: :order_details,source: :item
+
+
+
 end
