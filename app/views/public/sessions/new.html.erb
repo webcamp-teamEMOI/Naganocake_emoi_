@@ -11,6 +11,7 @@
 <div class="container">
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
+
 <div class="form-group row mt-3 ml-5">
  <div class="col-sm-2 pl-5"><%= f.label :メールアドレス %></div>
  <div class="col-sm-6"><%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder:"sample@example.com",class:"form-control border-dark" %></div>
