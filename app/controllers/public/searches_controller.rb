@@ -9,7 +9,12 @@ class Public::SearchesController < ApplicationController
   private
 
   def match(value)
-    Item.where(name: value).or(Item.where(genre_id: value))
+    Item.where(name: value)
+  end
+
+  def genre(value)
+    @genre = Genre.find_by(name: value)
+    Item.where(genre_id: @genre.id)
   end
 
   def forward(value)
@@ -28,6 +33,8 @@ class Public::SearchesController < ApplicationController
     case how
     when 'match'
       match(value)
+    when 'genre'
+      genre(value)
     when 'forward'
       forward(value)
     when 'backward'
