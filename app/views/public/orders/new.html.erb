@@ -6,7 +6,7 @@
  <%= form_with(url: orders_path, method: :post) do |form| %>
 <div class="container ">
  <div class="form-group row mt-4">
-   <h4 class="col-sm-3"><strong>支払方法</strong></h4>
+   <h5 class="col-sm-3"><strong>支払方法</strong></h5>
  </div>
  <div class="form-group row ">
 			<!-- form.radio_button :カラム名, :保存される値(enumの番号) -->
@@ -21,7 +21,7 @@
  </div>
 
  <div class="form-group row ">
-   <h4 class="col-sm-2 "><strong>お届け先</strong></h4>
+   <h5 class="col-sm-2 "><strong>お届け先</strong></h4>
  </div>
  <div class="form-group row ">
    <h5 class="col-sm-3 mx-5"><%= form.radio_button :a_method, 0, checked: "checked" %>
@@ -68,7 +68,7 @@
 
 <div class="row mt-2 mb-2">
   <div class="col-sm-5"></div>
-  <div class="col-sm-3"><%= form.submit "確認画面へ進む", class: 'btn btn-warning col-xs-6 col-xs-offset-1'%></div>
+  <div class="col-sm-3"><%= form.submit "確認画面へ進む", class: 'btn btn-primary col-xs-6 col-xs-offset-1'%></div>
   <% end %>
 
 </div>
