@@ -10,18 +10,19 @@
           <tr><th>商品名</th><th>単価(税込)</th><th>数量</th><th>小計</th></tr>
         </thead>
         <tbody>
-          <tr>
-            <% sum = 0 %>
-            <% @cart_items.each do |cart_item| %>
+          <% sum = 0 %>
+          <% @cart_items.each do |cart_item| %>
+            <tr>
               <td><%= attachment_image_tag cart_item.item, :image, format: "jpeg", fallback: "no_image.jpg", size: "80x60" %><%= cart_item.item.name %></td>
               <td class="align-middle"><%= cart_item.item.add_tax_price.to_s(:delimited) %></td>
               <td class="align-middle"><%= cart_item.amount %></td>
               <td class="align-middle"><%= (cart_item.amount*cart_item.item.price*1.1).round.to_s(:delimited) %></td>
               <% sum += cart_item.amount*cart_item.item.price*1.1 %>
-            <% end %>
-          </tr>
+            </tr>
+          <% end %>
         </tbody>
       </table>
+      <%= paginate @cart_items %>
     </div>
 
     <div class="col-md-3 billing">
@@ -42,7 +43,7 @@
           <th  class="info" style="width: 20%">支払方法</th>
           <td class="text-left">
             <% if session[:order]["payment_method"] == 'bank_payment' %>
-             <%= '銀行振込' %>
+             <%= '銀行払い' %>
             <% else %>
              <%= 'クレジットカード' %>
             <% end %>
