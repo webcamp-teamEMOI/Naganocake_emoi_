@@ -24,10 +24,10 @@ class Customer < ApplicationRecord
  
  validates :last_name, presence: true
  validates :first_name, presence: true
- validates :last_name_kana, presence: true,format: { with: /\A[ァ-ヶー－]+\z/,message: "は全角カタカナです"}
- validates :first_name_kana, presence: true,format: { with: /\A[ァ-ヶー－]+\z/,message: "は全角カタカナです"}
- validates :postal_code, presence: true, format: { with: /\A\d{7}\z/,message: "は7桁です"}
+ validates :last_name_kana, format: { with: /\A[ァ-ヶー－]+\z/,message: "は全角カタカナで 入力してください"}
+ validates :first_name_kana, format: { with: /\A[ァ-ヶー－]+\z/,message: "は全角カタカナで 入力してください"}
+ validates :postal_code,  format: { with: /\A\d{7}\z/,message: "は7桁で入力してください"}
  validates :address, presence: true 
- validates :phone_number, presence: true ,format: { with: /\A\d{10,11}\z/,message: "は10桁もしくは11桁です"}
+ validates :phone_number, format: { with: /\A\d{10,11}\z/,message: "は10桁もしくは11桁で入力してください"}
 
 end

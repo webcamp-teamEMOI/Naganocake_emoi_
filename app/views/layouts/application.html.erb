@@ -4,9 +4,10 @@
     <title>NaganoCakeEmoi</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
   </head>
   <body>
     <header class="border-bottom">
@@ -18,7 +19,7 @@
             </span>
           <% else %>
             <span>
-              <%= link_to image_tag("naganocake-logo.jpg", size: "120x120"), root_path %>
+              <%= link_to image_tag("naganocake-logo.jpg", size: "120x120"), root_path, data: {"turbolinks" => false} %>
             </span>
           <% end %>
             <div class="row">
