@@ -16,7 +16,7 @@ class Public::CartItemsController < ApplicationController
 
     if cart_item.present?
 
-      cart_item.amount += amount.to_i
+      cart_item.amount = amount.to_i
       cart_item.save
       redirect_to cart_items_path
 
@@ -26,10 +26,12 @@ class Public::CartItemsController < ApplicationController
 
     else
 
-      @cart_item = Cart_item.new(cart_item_params)
-      @genres = Genre.all
       @item = Item.find_by(id:@cart_item.item_id)
-      redirect_to item_path(@item.id), flash: {alert: '※個数を選択して下さい'}
+      @genres = Genre.all
+      @cart_items = CartItem.new
+      flash[:notice] = '個数を選択してください、もしくは上限の20個以上商品を追加しようとしています'
+      # redirect_to item_path(@item.id)
+      render template: "items/show"
 
     end
   end
@@ -59,5 +61,5 @@ class Public::CartItemsController < ApplicationController
   private
   def cart_item_params
     params.require(:cart_item).permit(:item_id, :amount)
-
+  end
 end

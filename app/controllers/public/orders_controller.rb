@@ -1,6 +1,6 @@
 class Public::OrdersController < ApplicationController
 	before_action :authenticate_customer!
-	
+
   def new
     @order = Order.new
     @customer = current_customer
@@ -58,6 +58,7 @@ class Public::OrdersController < ApplicationController
 	if session[:order][:postal_code].presence && session[:order][:address].presence && session[:order][:name].presence
 		redirect_to orders_confirm_path
 	else
+		flash[:alert] = 'お届け先情報を入力してください'
 		redirect_to new_order_path
 	end
   end
