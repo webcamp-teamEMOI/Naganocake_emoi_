@@ -1,4 +1,6 @@
 class Public::OrdersController < ApplicationController
+	before_action :authenticate_customer! 
+
   def new
     @order = Order.new
     @customer = current_customer
@@ -6,12 +8,12 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm
-    @cart_items = current_customer.cart_items
+    @cart_items = current_customer.cart_items.page(params[:page]).per(4)
   end
 
   def create
 
-  	customer = current_customer
+  customer = current_customer
 
 	# sessionを使ってデータを一時保存
 	session[:order] = Order.new
@@ -56,6 +58,7 @@ class Public::OrdersController < ApplicationController
 	if session[:order][:postal_code].presence && session[:order][:address].presence && session[:order][:name].presence
 		redirect_to orders_confirm_path
 	else
+		flash[:alert] = 'お届け先情報を入力してください'
 		redirect_to new_order_path
 	end
   end

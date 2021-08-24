@@ -50,11 +50,12 @@
       <% sum += cart_item.amount*cart_item.item.price*1.1 %>
       <% end %>
     　</table>
+      <%= paginate @cart_items %>
     </div>
 
     <div class="row mt-3">
       <div class="offset-1 col-2">
-        <span><%= link_to "買い物を続ける", items_path,class:"btn btn-primary px-3" %></span>
+        <span><%= link_to "買い物を続ける", root_path, class:"btn btn-primary px-3" %></span>
       </div>
       <div class="col-3 ml-auto">
       <table class="table table-bordered">

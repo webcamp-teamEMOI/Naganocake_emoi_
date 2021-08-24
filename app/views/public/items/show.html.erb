@@ -1,4 +1,5 @@
 <div class="container mt-5 pt-2">
+  <%= flash[:notice] %>
   <div class="row">
     <div class="col-3 mt-5">
       <%= render 'genre', genres: @genres %>
@@ -10,7 +11,7 @@
       <h2 class="font-weight-bold"><%= @item.name %></h2>
       <p><%= @item.introduction %></p>
       <h4 class="mt-5 mb-4" ><span class="font-weight-bold">¥ <%= @item.add_tax_price.to_s(:delimited) %></span> <span class="small">(税込)</span></h4>
-      <% if customer_signed_in? %>
+       <% if customer_signed_in? %>
         <% if @item.is_active? %>
           <%= form_with model: @cart_items do |f| %>
           <div class="input-group">
@@ -23,7 +24,6 @@
           <div class="btn btn-danger">売切れ</div>
         <% end %>
       <% end %>
-      
     </div>
   </div>
 </div>
