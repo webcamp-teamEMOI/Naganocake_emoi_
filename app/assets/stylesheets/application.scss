@@ -45,7 +45,7 @@ footer{
 }
 
 main{
-  height:800px;
+  min-height:800px;
 }
 
 .main-visual {
@@ -114,4 +114,13 @@ main{
 
 td{
   vertical-align:center;
+}
+
+body{
+font-family: 'Noto Serif JP', serif;
+}
+
+// 見出し下線
+.under{
+  text-decoration:underline;
 }
