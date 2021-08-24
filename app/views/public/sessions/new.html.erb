@@ -1,6 +1,7 @@
 
 <div class="container">
  <div class="row mt-5 ml-3">
+
   <h4 class="bg-light">ログイン</h4>
  </diV>
  <div class="row mt-3 ml-5">
@@ -9,7 +10,8 @@
 </div>  
 
 <div class="container">
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= form_with model: @customer, url: customer_session_path, local: true do |f| %>
+
 
 <div class="form-group row mt-3 ml-5">
  <div class="col-sm-2 pl-5"><%= f.label :メールアドレス %></div>
