@@ -1,0 +1,33 @@
+<div class="container mt-5 pt-2">
+  <%= flash[:notice] %>
+  <div class="row">
+    <div class="col-2">
+      <%= render 'genre', genres: @genres %>
+    </div>
+    <div class="offset-1 col-4 d-flex justify-content-center">
+      <%= attachment_image_tag @item, :image, format: "jpeg", fallback: "no_image.jpg", size: "400x300" %>
+    </div>
+    <div class="offset-1 col-4">
+      <h2 class="font-weight-bold"><%= @item.name %></h2>
+      <p><%= @item.introduction %></p>
+      <h4 class="mt-5 mb-4" ><span class="font-weight-bold"><%= @item.add_tax_price.to_s(:delimited) %></span> <span class="small">円 (税込)</span></h4>
+      <% if customer_signed_in? %>
+        <% if @item.is_active? %>
+          <%= form_with model: @cart_items do |f| %>
+          <div class="input-group">
+            <%= f.hidden_field :item_id, value: @item.id %>
+            <%= f.select :amount, options_for_select((1..20).to_a), {include_blank: "個数選択"} ,{class: "form-control rounded"} %>
+            <%= f.submit "カートに入れる",class:"btn btn-outline-dark ml-5" %>
+          </div>
+          <% end %>
+        <% else %>
+          <div class="btn btn-outline-dark">売切れ</div>
+        <% end %>
+      <% else %>
+        　<p>ご購入の際は<%= link_to "会員新規登録", new_customer_registration_path %>をお願い致します</p>
+      <% end %>
+
+
+    </div>
+  </div>
+</div>

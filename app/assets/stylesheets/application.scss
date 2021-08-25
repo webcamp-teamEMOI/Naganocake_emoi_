@@ -1,0 +1,127 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap";
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+
+.pagination{
+  justify-content:center;
+}
+
+.page,
+.next,
+.last,
+.first,
+.prev{
+  margin:0 5px;
+}
+
+header{
+  background-color:#e9cc9f;
+}
+
+footer{
+  background-color:#e9cc9f;
+  height:100px;
+  width:100%;
+}
+
+.item-box p{
+  font-weight:bold;
+}
+
+main{
+  min-height:800px;
+}
+
+#container{
+  width: 100%;
+  height: 400px;
+}
+
+.image1 {
+  background-image: url(naganocake-top.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.image2 {
+  background-image: url(naganocake-top2.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.image3 {
+  background-image: url(naganocake-top3.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.image4 {
+  background-image: url(naganocake-top4.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.main-visual-content {
+  width: 40%;
+  height: 400px;
+  background-color: rgba(225, 225, 225, 0.5);
+  text-align: center;
+  padding-top: 155px;
+}
+
+.main-visual-text {
+  color: #764d0f;
+}
+
+.about-visual {
+  width: 100%;
+  height: 800px;
+  background-image: image-url("naganocake-about.jpg");
+  background-size: cover;
+  background-position: left
+  ;
+}
+
+.about {
+  margin-top: 200px;
+  text-align: center;
+  display: inline-block;
+}
+
+
+.genre-thead{
+  background-color:#fae9cf;
+}
+
+.genre-tbody{
+  background-color:#fdf7ee;
+}
+
+td{
+  vertical-align:center;
+}
+
+body{
+font-family: 'Noto Serif JP', serif;
+}
+
+// 見出し下線
+.under{
+  text-decoration:underline;
+}

@@ -1,0 +1,34 @@
+<div id="container">
+  <div id="images">
+    <div class="image1"> <%= render "main" %></div>
+    <div class="image2"> <%= render "main" %></div>
+    <div class="image3"> <%= render "main" %></div>
+    <div class="image4"> <%= render "main" %></div>
+  </div>
+</div>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-2 mt-5">
+      <%= render "genre", genres: @genres %> <!-- ジャンル検索の部分テンプレート -->
+    </div>
+    <div class="offset-1 col-9">
+      <div class="row ml-3 mb-3">
+        <h4><span class="font-weight-bold">新着商品</span></h4>
+      </div>
+      <div class="row">
+        <% @items.each do |item| %>
+          <div class="col-3">
+            <%= link_to item_path(item.id) do %>
+              <%= attachment_image_tag item, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150" %>
+            <% end %>
+            <p class="my-2"><%= link_to item.name, item_path(item.id),class:"font-weight-bold text-dark" %></p>
+            <p class="font-weight-bold text-dark mb-5"><%= item.add_tax_price.to_s(:delimited) %>円</p>
+          </div>
+        <% end %>
+      </div>
+      <div class="row justify-content-end">
+        <%= link_to "全ての商品を見る >", items_path %>
+      </div>
+    </div>
+  </div>
+</div>

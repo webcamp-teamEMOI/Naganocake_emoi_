@@ -1,0 +1,116 @@
+<div class="container">
+ <div class="row mt-5">
+  <h3 class="under">新規会員登録</h3>
+ </div>
+</div>
+
+<div class="container mt-5">
+  <%= form_with model: @customer, url: customer_registration_path, id: 'new_customer', class: 'new_customer', local: true do |f| %>
+
+  <div class="form-group row mt-1 ">
+    <div class="col-sm-3"><%= f.label :名前 %></div>
+
+    <div class="col-sm-3">
+      (姓)<%= f.text_field :last_name, autofocus: true,placeholder:"令和",class:"form-control border-dark" %>
+      <% errors_hash(resource)[:last_name].each do |error_msg| %>
+      <p class="text-xs text-danger"><%= error_msg %></p>
+      <% end %>
+    </div>
+    <div class="col-sm-3">
+      (名)<%= f.text_field :first_name, autofocus: true ,placeholder:"道子",class:"form-control border-dark" %>
+      <% errors_hash(resource)[:first_name].each do |error_msg| %>
+      <p class="text-xs text-danger"><%= error_msg %></p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group row mt-1 ">
+    <div class="col-sm-3"><%= f.label :フリガナ %></div>
+    <div class="col-sm-3">
+      (セイ)<%= f.text_field :last_name_kana, autofocus: true,placeholder:"レイワ" ,class:"form-control border-dark"%>
+      <% errors_hash(resource)[:last_name_kana].each do |error_msg| %>
+      <p class="text-xs text-danger"><%= error_msg %></p>
+      <% end %>
+    </div>
+
+    <div class="col-sm-3 ">
+      (メイ)<%= f.text_field :first_name_kana, autofocus: true,placeholder:"ミチコ" ,class:"form-control border-dark"%>
+      <% errors_hash(resource)[:first_name_kana].each do |error_msg| %>
+      <p class="text-xs text-danger"><%= error_msg %></p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group row mt-1">
+    <div class="col-sm-3"><%= f.label :メールアドレス %></div>
+    <div class="col-sm-3">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder:"sample@example.com",class:"form-control border-dark" %>
+      <% errors_hash(resource)[:email].each do |error_msg| %>
+      <p class="text-xs text-danger"><%= error_msg %></p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group row mt-1">
+    <div class="col-sm-3"><%= f.label :郵便番号（ハイフンなし） %></div>
+    <div class="col-sm-3">
+      <%= f.text_field :postal_code, autofocus: true,placeholder:"0000000",class:"form-control border-dark" %>
+      <% errors_hash(resource)[:postal_code].each do |error_msg| %>
+      <p class="text-xs text-danger"><%= error_msg %></p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group row mt-1">
+    <div class="col-sm-3"><%= f.label :住所 %></div>
+    <div class="col-sm-6">
+      <%= f.text_field :address, autofocus: true,placeholder:"東京都渋谷区代々木神園待ち0-0" ,class:"form-control border-dark"%>
+      <% errors_hash(resource)[:address].each do |error_msg| %>
+      <p class="text-xs text-danger"><%= error_msg %></p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group row mt-1">
+    <div class="col-sm-3"><%= f.label :電話番号（ハイフンなし） %></div>
+    <div class="col-sm-3">
+      <%= f.text_field :phone_number, autofocus: true,placeholder:"0000000000" ,class:"form-control border-dark"%>
+      <% errors_hash(resource)[:phone_number].each do |error_msg| %>
+      <p class="text-xs text-danger"><%= error_msg %></p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group row mt-1">
+    <div class="col-sm-3"><%= f.label :パスワード %>
+      <% if @minimum_password_length %>
+      (<%= @minimum_password_length %>文字以上)</div>
+      <% end %><br>
+    <div class="col-sm-3">
+      <%= f.password_field :password, autocomplete: "new-password" ,class:"form-control border-dark"%>
+      <% errors_hash(resource)[:password].each do |error_msg| %>
+      <p class="text-xs text-danger"><%= error_msg %></p>
+      <% end %>
+    </div>
+  </div>
+
+ <div class="form-group row mt-1">
+  <div class="col-sm-3"><%= f.label :パスワード（確認用） %></div>
+  <div class="col-sm-3"><%= f.password_field :password_confirmation, autocomplete: "new-password",class:"form-control border-dark" %></div>
+ </div>
+
+ <div class="row mt-2">
+  <div class="col-sm-3"></div>
+  <div class="col-sm-3"><%= f.submit "新規登録",class:"btn btn-outline-dark btn-block mt-3 " %></div>
+ </div>
+<% end %>
+
+<div class="row mt-5 ml-5">
+  <h4>既に登録済みの方</h4>
+</div>
+<div class="row ml-4 mt-1">
+  <p class="pl-5"><u class="mr-3"><%= link_to "こちら",customers_sign_in_path %></u>からログインしてください。</p>
+</div>
+
+</div>
+

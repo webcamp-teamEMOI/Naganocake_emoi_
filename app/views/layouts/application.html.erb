@@ -5,11 +5,131 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
 
+  </head>
   <body>
-    <%= yield %>
+    <header class="border-bottom">
+      <nav class="navbar navbar-expand-lg px-4 pt-4 pb-3">
+        <div class="container-fluid">
+          <% if admin_signed_in? %>
+            <span>
+              <%= link_to image_tag("naganocake-logo.jpg", size: "120x120"), admin_root_path %>
+            </span>
+          <% else %>
+            <span>
+              <%= link_to image_tag("naganocake-logo.jpg", size: "120x120"), root_path, data: {"turbolinks" => false} %>
+            </span>
+          <% end %>
+            <div class="row">
+              <div class="col-12 collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                <% if customer_signed_in? %>
+                  <div class="mr-5">
+                    ようこそ、<%= current_customer.last_name %>さん！
+                  </div>
+                  <ul class="nav navbar-nav">
+                    <li class="nav-item">
+                      <%= link_to "マイページ", customers_my_page_path(current_customer), class:"btn btn-md btn-outline-secondary mr-5" %>
+                    </li>
+                    <li class="nav-item">
+                      <%= link_to "商品一覧", items_path, class:"btn btn-md btn-outline-secondary mr-5" %>
+                    </li>
+                    <li class="nav-item">
+                      <%= link_to "カート", cart_items_path, class:"btn btn-md btn-outline-secondary mr-5" %>
+                    </li>
+                    <li class="nav-item">
+                      <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"btn btn-md btn-outline-secondary mr-3" %>
+                    </li>
+                  </ul>
+                <% elsif admin_signed_in? %>
+                  <ul class="nav navbar-nav">
+                    <li class="nav-item">
+                      <%= link_to "商品一覧", admin_items_path, class:"btn btn-md btn-outline-secondary mr-5" %>
+                    </li>
+                    <li class="nav-item">
+                      <%= link_to "会員一覧", admin_customers_path, class:"btn btn-md btn-outline-secondary mr-5" %>
+                    </li>
+                    <li class="nav-item">
+                      <%= link_to "注文履歴一覧", admin_root_path, class:"btn btn-md btn-outline-secondary mr-5" %>
+                    </li>
+                    <li class="nav-item">
+                      <%= link_to "ジャンル一覧", admin_genres_path, class:"btn btn-md btn-outline-secondary mr-5" %>
+                    </li>
+                    <li class="nav-item">
+                      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"btn btn-md btn-outline-secondary mr-3" %>
+                    </li>
+                  </ul>
+                <% else %>
+                  <ul class="nav navbar-nav">
+                    <li class="nav-item">
+                      <%= link_to "About", about_path, class:"btn btn-md btn-outline-secondary mr-5" %>
+                    </li>
+                    <li class="nav-item">
+                      <%= link_to "商品一覧", items_path, class:"btn btn-md btn-outline-secondary mr-5" %>
+                    </li>
+                    <li class="nav-item">
+                      <%= link_to "新規登録", new_customer_registration_path, class:"btn btn-md btn-outline-secondary mr-5" %>
+                    </li>
+                    <li class="nav-item">
+                      <%= link_to "ログイン", new_customer_session_path, class:"btn btn-md btn-outline-secondary mr-3" %>
+                    </li>
+                  </ul>
+                <% end %>
+              </div>
+
+              <div class="offset-2 col-5 mt-3 justify-content-end d-flex">
+                <span class="text-dark"><%= notice %></span>
+                <span class="text-danger"><%= alert %></span>
+              </div>
+
+            <% if admin_signed_in? %>
+              <div class=" col-5 mt-3">
+                <%= form_with url: admin_search_path, method: :get, local: true do |f| %>
+                  <div class="input-group">
+                    <%= f.text_field 'search[value]', placeholder: "商品の検索はこちらから", size: "26x4",class:"form-control border" %>
+                    <div class="input-group-append" >
+                      <%= f.select 'search[how]', options_for_select({ "部分一致" => "partical", "前方一致" => "forward", "後方一致" => "backward", "完全一致" => "match" }),{},class:"border px-2" %>
+                    </div>
+                    <div class="input-group-append border rounded-right px-3">
+                      <%= f.button :type => "submit", style: 'border-style: none; background: none;',class:"input-group-btn" do %>
+                        <i class="fas fa-search"></i>
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% else %>
+              <div class=" col-5 mt-3">
+                <%= form_with url: search_path, method: :get, local: true do |f| %>
+                  <div class="input-group">
+                    <%= f.text_field 'search[value]', placeholder: "商品の検索はこちらから", size: "26x4",class:"form-control border" %>
+                    <div class="input-group-append" >
+                      <%= f.select 'search[how]', options_for_select({ "部分一致" => "partical", "前方一致" => "forward", "後方一致" => "backward", "完全一致" => "match" }) ,{},class:"border px-2" %>
+                    </div>
+                    <div class="input-group-append border rounded-right px-3">
+                      <%= f.button :type => "submit", style: 'border-style: none; background: none;',class:"input-group-btn" do %>
+                        <i class="fas fa-search"></i>
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <%= yield %>
+    </main>
+
   </body>
+  <footer class="border border-top"></footer>
 </html>
