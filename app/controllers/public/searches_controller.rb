@@ -18,7 +18,7 @@ class Public::SearchesController < ApplicationController
   end
 
   def forward(value)
-    Item.where("name LIKE ?", "#{value}%")        
+    Item.where("name LIKE ?", "#{value}%")
   end
 
   def backward(value)
