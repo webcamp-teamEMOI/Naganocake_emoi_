@@ -91,7 +91,7 @@
               <div class=" col-5 mt-3">
                 <%= form_with url: admin_search_path, method: :get, local: true do |f| %>
                   <div class="input-group">
-                    <%= f.text_field 'search[value]', placeholder: "Search", size: "26x4",class:"form-control border" %>
+                    <%= f.text_field 'search[value]', placeholder: "商品の検索はこちらから", size: "26x4",class:"form-control border" %>
                     <div class="input-group-append" >
                       <%= f.select 'search[how]', options_for_select({ "部分一致" => "partical", "前方一致" => "forward", "後方一致" => "backward", "完全一致" => "match" }),{},class:"border px-2" %>
                     </div>
@@ -107,7 +107,7 @@
               <div class=" col-5 mt-3">
                 <%= form_with url: search_path, method: :get, local: true do |f| %>
                   <div class="input-group">
-                    <%= f.text_field 'search[value]', placeholder: "キーワードを入力", size: "26x4",class:"form-control border" %>
+                    <%= f.text_field 'search[value]', placeholder: "商品の検索はこちらから", size: "26x4",class:"form-control border" %>
                     <div class="input-group-append" >
                       <%= f.select 'search[how]', options_for_select({ "部分一致" => "partical", "前方一致" => "forward", "後方一致" => "backward", "完全一致" => "match" }) ,{},class:"border px-2" %>
                     </div>
