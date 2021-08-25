@@ -11,7 +11,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-   
+
   </head>
   <body>
     <header class="border-bottom">
@@ -27,7 +27,7 @@
             </span>
           <% end %>
             <div class="row">
-              <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+              <div class="col-12 collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                 <% if customer_signed_in? %>
                   <div class="mr-5">
                     ようこそ、<%= current_customer.last_name %>さん！
@@ -81,8 +81,14 @@
                   </ul>
                 <% end %>
               </div>
+
+              <div class="offset-2 col-5 mt-3 justify-content-end d-flex">
+                <span class="text-dark"><%= notice %></span>
+                <span class="text-danger"><%= alert %></span>
+              </div>
+
             <% if admin_signed_in? %>
-              <div class="offset-7 col-5 mt-3">
+              <div class=" col-5 mt-3">
                 <%= form_with url: admin_search_path, method: :get, local: true do |f| %>
                   <div class="input-group">
                     <%= f.text_field 'search[value]', placeholder: "Search", size: "26x4",class:"form-control border" %>
@@ -98,10 +104,10 @@
                 <% end %>
               </div>
             <% else %>
-              <div class="offset-7 col-5 mt-3">
+              <div class=" col-5 mt-3">
                 <%= form_with url: search_path, method: :get, local: true do |f| %>
                   <div class="input-group">
-                    <%= f.text_field 'search[value]', placeholder: "Search", size: "26x4",class:"form-control border" %>
+                    <%= f.text_field 'search[value]', placeholder: "キーワードを入力", size: "26x4",class:"form-control border" %>
                     <div class="input-group-append" >
                       <%= f.select 'search[how]', options_for_select({ "部分一致" => "partical", "前方一致" => "forward", "後方一致" => "backward", "完全一致" => "match" }) ,{},class:"border px-2" %>
                     </div>
@@ -111,25 +117,19 @@
                       <% end %>
                     </div>
                   </div>
-                <!--<span class="search-button col-xs-12 text-right">-->
-                  <%#= f.select 'search[how]', options_for_select({ "部分一致" => "partical", "前方一致" => "forward", "後方一致" => "backward", "完全一致" => "match" }),class:"form-select" %>
-                <!--</span>-->
                 <% end %>
               </div>
             <% end %>
+
           </div>
         </div>
       </nav>
     </header>
+
     <main>
-      <div class="container">
-       <div class="row">
-         <h4 class="notice "><%= notice %></h4>
-  　      <h4 class="alert text-danger"><%= alert %></h4>
-  　    </div>
-  　　</div>
       <%= yield %>
     </main>
+
   </body>
   <footer class="border border-top"></footer>
 </html>
