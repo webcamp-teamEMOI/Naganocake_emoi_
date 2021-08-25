@@ -55,7 +55,7 @@
 # インストール
 $ git clone　<br>
 $ cd Naganocake_emoi_ <br>
-$ git bundle install<br>
+$ bundle install<br>
 # 推奨環境
 ruby 2.6 以降 Rails 5.2.6 以降
 # 開発者
