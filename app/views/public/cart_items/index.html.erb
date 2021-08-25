@@ -1,6 +1,6 @@
 <% if !@cart_items.present? %>
 
-  <div class="container">
+  <div class="container mt-5">
     <div class="row"><h3 class="col-3 under text-center">ショッピングカート</h3></div>
     <div class="info d-flex align-items-center justify-content-center" style="height:600px;">
     	<h1>カート内アイテムが存在しません</h1>
@@ -10,8 +10,7 @@
 
 <% else %>
 
-  <div class="container">
-    
+  <div class="container mt-5">
     <div class="row">
       <h3 class="col-3 under text-center">ショッピングカート</h3>
       <span class="ml-auto col-3 text-right">
@@ -34,7 +33,7 @@
           <%= attachment_image_tag cart_item.item, :image, format: "jpeg", fallback: "no_image.jpg", size: "100x75",class:"mr-3" %>
           <%= cart_item.item.name %>
         </td>
-        <td class="align-middle"><%= cart_item.item.add_tax_price.to_s(:delimited) %></td>
+        <td class="align-middle"><%= cart_item.item.add_tax_price.to_s(:delimited) %>円</td>
         <td class="align-middle">
           <%= form_with model: cart_item, local:true do |f| %>
           <div class="input-group row">
@@ -43,7 +42,7 @@
           </div>
           <% end %>
         </td>
-        <td class="align-middle"><%= (cart_item.amount*cart_item.item.price*1.1).round.to_s(:delimited) %></td>
+        <td class="align-middle"><%= (cart_item.amount*cart_item.item.price*1.1).round.to_s(:delimited) %>円</td>
         <td class="text-center align-middle"><%= link_to "削除する", cart_item_path(cart_item), method: :delete,class:"btn btn-outline-danger btn-sm" %></td>
         </tr>
       </tbody>
