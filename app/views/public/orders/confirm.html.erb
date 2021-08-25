@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mt-5">
 
   <div class="row"><h3 class="under px-4 mb-5">注文情報確認</h3></div>
 
@@ -14,9 +14,9 @@
           <% @cart_items.each do |cart_item| %>
             <tr>
               <td><%= attachment_image_tag cart_item.item, :image, format: "jpeg", fallback: "no_image.jpg", size: "80x60",class:"mr-3" %><%= cart_item.item.name %></td>
-              <td class="align-middle"><%= cart_item.item.add_tax_price.to_s(:delimited) %></td>
+              <td class="align-middle"><%= cart_item.item.add_tax_price.to_s(:delimited) %>円</td>
               <td class="align-middle"><%= cart_item.amount %></td>
-              <td class="align-middle"><%= (cart_item.amount*cart_item.item.price*1.1).round.to_s(:delimited) %></td>
+              <td class="align-middle"><%= (cart_item.amount*cart_item.item.price*1.1).round.to_s(:delimited) %>円</td>
               <% sum += cart_item.amount*cart_item.item.price*1.1 %>
             </tr>
           <% end %>
@@ -28,9 +28,9 @@
     <div class="col-md-3 billing">
       <table class="table table-bordered border-primary">
        <!-- sessiomのデータを表示する場合、カラム名に""つける -->
-          <tr><td class="font-weight-bold table-secondary">配送料</td><td><%= session[:order]["shipping_cost"].to_s(:delimited) %></td></tr>
-          <tr><td class="font-weight-bold table-secondary">商品合計</td><td><%= sum.round.to_s(:delimited) %></td></tr>
-          <tr><td class="font-weight-bold table-secondary">請求金額</td><td><%= session[:order]["total_payment"].to_s(:delimited) %></td></tr>
+          <tr><td class="font-weight-bold table-secondary">配送料</td><td><%= session[:order]["shipping_cost"].to_s(:delimited) %>円</td></tr>
+          <tr><td class="font-weight-bold table-secondary">商品合計</td><td><%= sum.round.to_s(:delimited) %>円</td></tr>
+          <tr><td class="font-weight-bold table-secondary">請求金額</td><td><%= session[:order]["total_payment"].to_s(:delimited) %>円</td></tr>
       </table>
     </div>
 
@@ -52,7 +52,7 @@
         <tr>
           <th  class="info" style="width: 20%">お届け先</th>
           <td class="text-left">
-            〒<%= session[:order]["postal_code"] %>
+            〒<%= session[:order]["postal_code"] %><br>
             <%= session[:order]["address"] %><br>
             <%= session[:order]["name"]  %>
           </td>
