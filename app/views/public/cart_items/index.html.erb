@@ -1,7 +1,7 @@
 <% if !@cart_items.present? %>
 
-  <div class="container mt-5">
-    <div class="row"><h5 class=" col-3 text-center bg-light ">ショッピングカート</h5></div>
+  <div class="container">
+    <div class="row"><h3 class="col-3 under text-center">ショッピングカート</h3></div>
     <div class="info d-flex align-items-center justify-content-center" style="height:600px;">
     	<h1>カート内アイテムが存在しません</h1>
     </div>
@@ -10,12 +10,11 @@
 
 <% else %>
 
-  <div class="container mt-5">
-
+  <div class="container">
     <div class="row">
-      <h3 class="col-3 text-center">ショッピングカート</h3>
+      <h3 class="col-3 under text-center">ショッピングカート</h3>
       <span class="ml-auto col-3 text-right">
-        <%= link_to "カートを空にする", cart_items_destroy_all_path, method: :delete,class:"btn btn-danger px-3" %>
+        <%= link_to "カートを空にする", cart_items_destroy_all_path, method: :delete,class:"btn btn-outline-danger px-3" %>
       </span>
     </div>
 
@@ -39,12 +38,12 @@
           <%= form_with model: cart_item, local:true do |f| %>
           <div class="input-group row">
           <div class="ml-auto col-5"><%= f.select :amount, [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],{},{class:"form-control"} %></div>
-          <div class="mr-auto col-3"><%= f.submit "変更",class:" btn btn-success" %></div>
+          <div class="mr-auto col-3"><%= f.submit "変更",class:" btn btn-outline-success" %></div>
           </div>
           <% end %>
         </td>
         <td class="align-middle"><%= (cart_item.amount*cart_item.item.price*1.1).round.to_s(:delimited) %></td>
-        <td class="text-center align-middle"><%= link_to "削除する", cart_item_path(cart_item), method: :delete,class:"btn btn-danger" %></td>
+        <td class="text-center align-middle"><%= link_to "削除する", cart_item_path(cart_item), method: :delete,class:"btn btn-outline-danger btn-sm" %></td>
         </tr>
       </tbody>
       <% sum += cart_item.amount*cart_item.item.price*1.1 %>
@@ -55,15 +54,15 @@
 
     <div class="row mt-3">
 
-      <div class="offset-1 col-2">
-        <span><%= link_to "買い物を続ける", root_path, class:"btn btn-primary px-3" %></span>
+      <div class="col-3">
+        <span><%= link_to "<  買い物を続ける", root_path, class:"btn btn-outline-dark px-3" %></span>
 
       </div>
       <div class="col-3 ml-auto">
       <table class="table table-bordered">
         <tr>
           <th class="table-secondary">合計金額</th>
-          <th><%= sum.round.to_s(:delimited) %></th>
+          <th><%= sum.round.to_s(:delimited) %>円</th>
         </tr>
       </table>
       </div>
@@ -72,7 +71,7 @@
     </div>
     <div class="row">
     <div class="col-sm-5"></div>
-    <div class="col-sm-3"><%= link_to "入力情報に進む", new_order_path,class:"btn btn-success px-3" %></div>
+    <div class="col-sm-3"><%= link_to "入力情報に進む", new_order_path,class:"btn btn-outline-success px-3" %></div>
     </div>
   </div>
 
