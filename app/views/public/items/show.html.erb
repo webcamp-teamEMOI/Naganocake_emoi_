@@ -21,8 +21,10 @@
           </div>
           <% end %>
         <% else %>
-          <div class="btn btn-danger">売切れ</div>
+          <div class="btn btn-outline-dark">売切れ</div>
         <% end %>
+      <% else %>
+        　<p>ご購入の際は<%= link_to "会員新規登録", new_customer_registration_path %>をお願い致します</p>
       <% end %>
 
 

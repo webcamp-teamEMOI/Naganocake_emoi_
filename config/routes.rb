@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # devise_for :admins
   # devise_for :customers
   scope module: :public do
+  root to: "homes#top"
   get "customers/edit" => "customers#edit"
   get "customers/my_page" => "customers#show"
   patch "customers/my_page" => "customers#update"
@@ -33,7 +34,7 @@ Rails.application.routes.draw do
   end
 
   scope module: :public do
-    root to: "homes#top"
+
     get "about" => "homes#about"
     get "/search", to: "searches#search"
     resources :items,only:[:index,:show]

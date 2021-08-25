@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mt-5">
  <%= flash[:alert] %>
  <div class="row mb-5">
   <h3 class="under px-4">注文情報入力</h3>
@@ -37,7 +37,13 @@
    <h5 class="col-sm-3 mx-5"><%= form.radio_button :a_method, 1 %>
    <%= form.label :登録済住所から選択 %></h5>
    <div class="col-sm-9"></div>
-   <div class="offset-sm-1 col-sm-8"><%= form.collection_select :address_for_order, @addresses, :id, :address_all %></div>
+   <div class="offset-sm-1 col-sm-8">
+     <% if !@addresses.present? %>
+       <p><%= link_to "配送先", addresses_path %>が登録されていません<br>下記の新しいお届け先を選択、入力し注文確定されると自動的にその住所が配送先へ登録されます</p>
+     <% else %>
+       <%= form.collection_select :address_for_order, @addresses, :id, :address_all, include_blank: " 登録してある配送先住所から選択", size: "100x75" %>
+     <% end %>
+   </div>
  </div>
 
  <div class="form-group row ">
