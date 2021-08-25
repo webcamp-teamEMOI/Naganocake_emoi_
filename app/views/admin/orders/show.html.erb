@@ -1,11 +1,11 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h3 class="my-3"><span class="bg-light">注文履歴詳細</span></h3>
+      <h3 class="my-5 under">注文履歴詳細</span></h3>
 
       <div class="row">
         <div class="col-2 mb-3 font-weight-bold">購入者</div>
-        <div class="col-10"><span class="border-bottom border-dark"><%= @order.customer.full_name %></span></div>
+        <div class="col-10"><span class="under"><%= @order.customer.full_name %></span></div>
 
         <div class="col-2 mb-3 font-weight-bold">注文日</div>
         <div class="col-10"><%= @order.created_at.strftime("%Y/%m/%d") %></div>
@@ -26,8 +26,8 @@
         <div class="col-6 input-group">
           <%= form_with model: @order,url:admin_order_path(@order) ,local:true do |f| %>
           <div class="row">
-          <div class="col-8"><%= f.select :status,Order.statuses_i18n.invert,{prompt: false},class:"form-control" %></div>
-          <div class="col-3"><%= f.submit "更新" ,class:" btn btn-success" %></div>
+          <div class="col-8"><%= f.select :status,Order.statuses_i18n.invert,{prompt: false},class:"form-control border-dark text-dark" %></div>
+          <div class="col-3"><%= f.submit "更新" ,class:" btn btn-outline-dark" %></div>
           </div>
           <% end %>
         </div>
@@ -57,8 +57,8 @@
               <td class="align-middle">
                 <%= form_with model: order_detail,url: admin_order_order_detail_path(@order,order_detail), local:true do |f| %>
                 <div class="input-group row">
-                <div class="ml-auto col-8"><%= f.select :making_status,OrderDetail.making_statuses_i18n.invert,{prompt: false} ,class:"form-control" %></div>
-                <div class="mr-auto col-3"><%= f.submit "更新",class:"btn btn-success" %></div>
+                <div class="ml-auto col-8"><%= f.select :making_status,OrderDetail.making_statuses_i18n.invert,{prompt: false} ,class:"form-control border-dark text-dark" %></div>
+                <div class="mr-auto col-3"><%= f.submit "更新",class:"btn btn-outline-dark" %></div>
                 </div>
                 <% end %>
               </td>
