@@ -13,7 +13,7 @@
           <% sum = 0 %>
           <% @cart_items.each do |cart_item| %>
             <tr>
-              <td><%= attachment_image_tag cart_item.item, :image, format: "jpeg", fallback: "no_image.jpg", size: "80x60" %><%= cart_item.item.name %></td>
+              <td><%= attachment_image_tag cart_item.item, :image, format: "jpeg", fallback: "no_image.jpg", size: "80x60",class:"mr-3" %><%= cart_item.item.name %></td>
               <td class="align-middle"><%= cart_item.item.add_tax_price.to_s(:delimited) %></td>
               <td class="align-middle"><%= cart_item.amount %></td>
               <td class="align-middle"><%= (cart_item.amount*cart_item.item.price*1.1).round.to_s(:delimited) %></td>
@@ -60,6 +60,6 @@
       </table>
   </div>
 
-  <div class="row justify-content-center"><%= link_to "購入を確定する", orders_complete_path, class: 'btn btn-outline-success btn-lg' %></div>
+  <div class="row justify-content-center"><%= link_to "購入を確定する", orders_complete_path, class: 'btn btn-outline-dark btn-lg' %></div>
 
 </div>
