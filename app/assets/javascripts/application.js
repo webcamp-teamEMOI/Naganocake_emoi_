@@ -9,18 +9,17 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
-//
 
 //= require jquery3
+//= require jquery
+
 //= require popper
 //= require bootstrap-sprockets
 
-//= require jquery
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
 //= require_tree .
-
 
 $(document).ready(function(){
   $("#images").skippr({
