@@ -53,7 +53,7 @@
 ■フレームワーク<br>
 　Ruby on Rails
 # インストール
-$ git clone　<br>
+$ git clone git@github.com:webcamp-teamEMOI/Naganocake_emoi_.git<br>
 $ cd Naganocake_emoi_ <br>
 $ bundle install<br>
 # 推奨環境
